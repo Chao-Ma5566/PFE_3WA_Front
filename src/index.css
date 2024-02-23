@@ -1,0 +1,525 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+@layer base{
+  
+  h2{
+    @apply text-4xl my-2
+  }
+  button {
+    @apply text-gray-100 bg-gray-800 rounded px-1.5 py-0.5 space-y-3 hover:bg-gray-700 duration-500;
+  }
+  input {
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700;
+  }
+  textarea {
+    @apply shadow appearance-none border rounded w-full py-2 px-3 text-gray-700;
+  }
+  .admin-header {
+    @apply mt-4 pt-10 pb-5 border-b-2 relative;
+  }
+  .container-admin {
+    @apply px-4 md:px-16 text-gray-100 w-full border-gray-500 overflow-auto;
+  }
+  .a {
+    @apply duration-200;
+  }
+  .valided{
+    @apply opacity-50 line-through;
+  } 
+  label {
+    @apply text-gray-700 mb-2
+  }
+  select {
+    @apply text-gray-700 border rounded
+  }
+  .admin form {
+    @apply bg-gray-100 mt-8
+  }
+}
+
+
+
+/************ Custom Font ************/
+@font-face {
+    font-family: "Satoshi";
+    font-weight: normal;
+    src: url("/fonts/Satoshi-Regular.woff2") format("woff2"), url("/fonts/Sans-Regular.woff") format("woff");
+  }
+
+
+
+/************ Default Css ************/
+body {
+  margin: 0;
+}
+
+
+
+/************ Collection Page ************/
+.collection{
+  width: 100%;
+  overflow: hidden;
+}
+.collection_contrainer{
+  height: 100vh;
+}
+.collection_contrainer h1{
+  text-align: center;
+  padding-top: 4rem;
+  font-size: 2.5rem;
+}
+
+
+
+/*** Collection Banner ***/
+.banner_bubble{
+  background: linear-gradient(to top, #16222A, #16222A 10%, #3A6073);
+}
+.banner_inflatable{
+  background: linear-gradient(to top, #614385, #516395);
+}
+.banner_fluff{
+  background: linear-gradient(to top, #1D2B64, #F8CDDA);
+}
+.banner_co-collection{
+  background: linear-gradient(to top, #00b0a6, #e1aa12);
+}
+.collection_carousel{
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 1rem;
+  transition-duration: 500ms;
+}
+.collection_carousel .big_image{
+  height: 25rem;
+  width: 25rem;
+  background-size: contain;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  transition-duration: 500ms;
+}
+.collection_carousel .bubble{
+  background-image: url("/img/bubble.jpg");
+}
+.collection_carousel .inflatable{
+  background-image: url("/img/inflatable.jpg");
+}
+.collection_carousel .fluff{
+  background-image: url("/img/fluff.jpg");
+}
+.collection_carousel .co-collection{
+  background-image: url("/img/co-collection.jpg");
+}
+.collection_button{
+  transform: translate(0px, -2rem);
+  text-decoration: underline;
+}
+.collection_choice{
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+}
+
+.collection_choice div{
+  cursor: pointer;
+  background: #e1aa12;
+  margin-bottom: 0.5rem;
+  text-align: center;
+  border-radius: 5px;
+  color: white;
+  padding: 3px 5px;
+  transition-duration: 500ms;
+}
+.collection_choice div::before {
+    content: '→ ';
+}
+.collection_choice div:hover{
+  background: #00b0a6;
+}
+.collection_choice .selected{
+  border: 1px solid white;
+}
+
+
+
+/*** Collection Bubble ***/
+.bubble_banner{
+  height: 100vh;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  background-image: url("/img/bubbleBanner.png");
+  overflow: hidden;
+}
+.bubble_banner div{
+  height: 100%;
+  position: relative;
+  z-index:10;
+  background-size: cover;
+  background-position: center;
+  background-image: url("/img/bubbleHero.png");
+  overflow: hidden;
+  margin:auto;
+}
+
+@keyframes animatedBubbleTitle {
+  from {
+    transform: translate(70rem, -40rem);
+  }
+  to{
+    transform: translate(10px, -40rem);
+  }
+}
+.bubble_title{
+  color: white;
+  font-size: 6rem;
+  transform: translate(10px, -40rem);
+  animation: animatedBubbleTitle 5s alternate infinite;
+}
+
+@keyframes animatedBubbleFront {
+  from {
+    transform: translate(-200rem, -20rem);
+  }
+  to{
+    transform: translate(10rem, -20rem);
+  }
+}
+.bubble_front{
+  color: white;
+  font-size: 4rem;
+  position: relative;
+  z-index:11;
+  transform: translate(10rem, -20rem);
+  animation: animatedBubbleFront 3s alternate;
+}
+
+.collection_desription{
+  width:90%;
+  margin: auto;
+  transform: translate(0, -5rem);
+}
+
+.collection_desription p{
+  margin-bottom: 1rem;
+}
+
+.collection_product_img_left{
+  width: 13rem;
+  float: left;
+  padding: 0 15px 15px 0;
+}
+
+
+
+/*** Collection Inflatable ***/
+.inflatable_banner{
+  height: 100vh;
+  margin-bottom: 10rem;
+  position: relative;
+  background-size: cover;
+  background-image: url("/img/inflaHero.png");
+  overflow: hidden;
+  animation: animatedBackground 10s infinite alternate;
+}
+@keyframes animatedBackground {
+  from {
+    background-position: -100% -100%;
+  }
+  to {
+    background-position: 100% 100%;
+  }
+}
+
+.inflatable_banner>div{
+  height: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  background-image: url("/img/inflatable2.jpg");
+  overflow: hidden;
+  margin:auto;
+}
+
+@keyframes animatedInflatableeTitle {
+  from {
+    transform: scale(0.3) translate(0, -15rem);;
+  }
+  to{
+    transform: scale(0.7) translate(0, -15rem);;
+  }
+  to{
+    transform: scale(1) translate(0, -15rem);;
+  }
+}
+.inflatable_title{
+  color: white;
+  transform: translate(0, -15rem);
+  font-size: 4rem;
+  animation: animatedInflatableeTitle 6s alternate;
+}
+
+.collection_product_img_right{
+  width: 13rem;
+  float: right;
+  padding: 0 0 15px 15px;
+}
+
+
+
+/*** Collection Fluff ***/
+.fluff_banner{
+  height: 100vh;
+  margin-bottom: 10rem;
+  background: linear-gradient(to right, #4CB8C4, #3CD3AD, #4CB8C4);
+}
+.fluff_banner>div{
+  height: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("/img/fluff.jpg");
+  overflow: hidden;
+  margin:auto;
+}
+
+@keyframes spindLetter{
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes spindLetterBack{
+  from {
+    transform: rotate(0);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+.fluff_banner .fluff_title_contrainer{
+  height: 20rem;
+  width: 20rem;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/img/fluff_circle.png");
+  background-size: contain;
+  background-position: center;
+  animation: spindLetter 10s infinite linear;
+  transform-origin: center 50%;
+}
+.fluff_title{
+  color:white;
+  font-size:7rem;
+  animation: spindLetterBack 10s infinite linear;
+  transform-origin: center 50%;
+}
+
+
+
+/*** Collection Co-Collection ***/
+.co_banner{
+  height: 100vh;
+  margin-bottom: 10rem;
+  background: url("/img/coBG.jpg");
+  background-size: cover;
+}
+.co_banner>div{
+  height: 100%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  text-align:center;
+  background-image: url("/img/co-collection.jpg");
+  overflow: hidden;
+  margin:auto;
+}
+.co_banner div h2{
+  padding: 2px 10px;
+  background: white;
+}
+
+
+
+/************ Articles ************/
+.article_container{
+  width: 90%;
+  margin:auto;
+  display: grid;
+  grid-gap: 10px;
+  grid-template-columns: repeat(1, 1fr);
+}
+.article_card{
+  width: 100%;
+  color: black;
+  display: flex;
+  flex-direction: column;
+  text-align:center;
+  background: white;
+  border:1px solid;
+  position: relative;
+}
+.article_card h5{
+  padding: 10px 10px;
+  font-size: 1.2rem;
+}
+.article_card::before {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
+
+.article_card img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+
+
+/************ Admin Page ************/
+.admin{
+  display:flex;
+}
+
+
+
+/********************** Media Queries *********************/
+@media (min-width:768px) {
+  /****** Collection Banner *****/
+	.collection_carousel .big_image{
+    height: 30rem;
+    width: 30rem;
+  }
+  .bubble_title{
+    font-size: 7rem;
+  }
+  .collection_choice{
+    width: 80%;
+    margin-top:2rem;
+    margin-right: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+  .collection_choice div{
+    padding:3px 10px;
+  }
+  
+  
+  /******* Collection *******/
+  .collection_product_img_left{
+    width: 20rem;
+  }
+  .inflatable_banner div{
+    max-width: 100vh;
+    background-size: contain;
+  }
+  .collection_product_img_right{
+    width: 20rem;
+  }
+  .co_banner div h2{
+    padding: 4px 15px;
+    margin-bottom: 1rem;
+  }
+  
+  
+  /************ Articles ************/
+  .article_container{
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+
+
+@media (min-width:1024px) {
+  /***** Collection Banner *****/
+	.collection_carousel .big_image{
+    height: 25rem;
+    width: 25rem;
+  }
+  .collection_choice{
+    width: 70%;
+    max-width: 800px;
+    margin-top:1rem;
+  }
+  .collection_choice div{
+    height: 10rem;
+    width: 10rem;
+    opacity: 0.7;
+    background-size: contain;
+    color: black;
+  }
+  .collection_choice div:hover{
+    opacity: 1;
+    background-size: contain;
+  }
+  .collection_choice .selected{
+    opacity: 1;
+  }
+  .collection_choice div:nth-child(1){
+    background-image: url("/img/bubble.jpg");
+  }
+  .collection_choice div:nth-child(2){
+    background-image: url("/img/inflatable.jpg");
+  }
+  .collection_choice div:nth-child(3){
+    background-image: url("/img/fluff.jpg");
+  }
+  .collection_choice div:nth-child(4){
+    background-image: url("/img/co-collection.jpg");
+  }
+  
+  
+  /***** Collection *****/
+  .bubble_title{
+    animation: animatedBubbleTitle 6s alternate infinite;
+  }
+  .bubble_front{
+    animation: animatedBubbleFront 6s alternate;
+  }
+  .collection_desription{
+    width:768px;
+  }
+  .fluff_banner .fluff_title_contrainer{
+    height: 40rem;
+    width: 40rem;
+    animation: spindLetter 20s infinite linear;
+  }
+  .fluff_title{
+    color:white;
+    font-size:7rem;
+    animation: spindLetterBack 20s infinite linear;
+    transform-origin: center 50%;
+  }
+  .co_banner div h2{
+    padding: 10px 20px;
+    font-size:3rem;
+    margin-bottom: 2rem;
+  }
+  
+  
+  /************ Articles ************/
+  .article_container{
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
