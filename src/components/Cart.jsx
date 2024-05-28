@@ -1,10 +1,11 @@
-import {useEffect,useContext,useState} from 'react'
-import axios from 'axios'
-import { StoreContext } from "../tools/context.js"
-import {BASE_URL, BASE_IMG} from "../tools/constante.js"
-import { NavLink } from "react-router-dom"
+import {BASE_IMG, BASE_URL} from "../tools/constante.js"
+import {useContext, useEffect, useState} from 'react'
+
 import CartCard from "./CartCard.jsx"
 import CartCardMoblie from "./CartCardMoblie.jsx"
+import { NavLink } from "react-router-dom"
+import { StoreContext } from "../tools/context.js"
+import axios from 'axios'
 
 const Cart = () => {
     const [state, dispatch] = useContext(StoreContext);
@@ -21,7 +22,7 @@ const Cart = () => {
             let newList = state.cartItems.map(item => {
                 if (item.quantity > item.stock) {
                     checkQuantity = true
-                    axios.post(`${BASE_URL}/addCart`,{
+                    axios.post(`${BASE_URL}/cart`,{
                         user_id: state.user.id, 
                         product_id: item.id,
                         cart_id: state.user.cart_id, 

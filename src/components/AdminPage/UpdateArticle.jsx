@@ -1,10 +1,10 @@
+import { Navigate, useParams } from "react-router-dom"
+import { checkVide, lengthLimit } from "../../tools/inputCheck.js"
 import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { BASE_URL } from "../../tools/constante.js"
-import { lengthLimit, checkVide } from "../../tools/inputCheck.js"
-import ConfirmationWindow from "../ConfirmationWindow.jsx"
-import { useParams, Navigate } from "react-router-dom"
 
+import { BASE_URL } from "../../tools/constante.js"
+import ConfirmationWindow from "../ConfirmationWindow.jsx"
+import axios from 'axios'
 
 const UpdateArticle = (props) => {
     const { articleId } = useParams();
@@ -17,7 +17,7 @@ const UpdateArticle = (props) => {
     
     useEffect(() => {
         setIsLoading(true)
-        axios.post(`${BASE_URL}/getArticleById`, { id: articleId })
+        axios.get(`${BASE_URL}/articles/${articleId}`)
             .catch(err => console.log(err))
             .then(res => {
                 setArticleInfo(res.data.data.result[0])
@@ -35,7 +35,7 @@ const UpdateArticle = (props) => {
             return
         }
         
-        axios.post(`${BASE_URL}/admin/updateArticle`, {
+        axios.patch(`${BASE_URL}/articles`, {
             title: articleInfo.title,
             content: articleInfo.content,
             id: articleId
@@ -65,7 +65,7 @@ const UpdateArticle = (props) => {
     }
     
     const handleDelete = () =>{
-        axios.post(`${BASE_URL}/admin/deleteArticle`,{id:articleId})
+        axios.delete(`${BASE_URL}/articles/${articleId}`)
         .then(res=>{
                 if(res.data.data.result.affectedRows > 0){
                     setIsDelete(true)

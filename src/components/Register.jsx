@@ -1,8 +1,9 @@
+import { NavLink, Navigate } from "react-router-dom"
+import {checkVide, lengthLimit} from "../tools/inputCheck.js"
+
+import {BASE_URL} from "../tools/constante.js"
 import axios from "axios"
 import { useState } from "react"
-import {BASE_URL} from "../tools/constante.js"
-import {lengthLimit, checkVide} from "../tools/inputCheck.js"
-import { NavLink, Navigate } from "react-router-dom"
 
 const Register = (props) => {
     const initialValue = { nom: "", prenom: "", email: "", password: "", birthday: "2010-06-22" }
@@ -32,7 +33,7 @@ const Register = (props) => {
             return
         }
         
-        axios.post(`${BASE_URL}/addUser`, {
+        axios.post(`${BASE_URL}/users`, {
             last_name: userInfo.nom.trim(),
             first_name: userInfo.prenom.trim(),
             email: userInfo.email.toLowerCase(),

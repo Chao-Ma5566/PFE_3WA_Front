@@ -1,8 +1,9 @@
-import axios from "axios"
+import {BASE_IMG, BASE_URL} from "../../tools/constante.js"
+import { Navigate, useParams } from "react-router-dom"
+import {checkVide, lengthLimit} from "../../tools/inputCheck.js"
 import { useEffect, useState } from "react"
-import {BASE_URL, BASE_IMG} from "../../tools/constante.js"
-import { useParams,Navigate } from "react-router-dom"
-import {lengthLimit, checkVide} from "../../tools/inputCheck.js"
+
+import axios from "axios"
 
 const UpdateArticlePhoto = (props) => {
     const { articleId } = useParams();
@@ -13,7 +14,7 @@ const UpdateArticlePhoto = (props) => {
     
     useEffect(() => {
         setIsLoading(true)
-        axios.post(`${BASE_URL}/getArticleById`, { id: articleId })
+        axios.get(`${BASE_URL}/articles/${articleId}`)
             .catch(err => console.log(err))
             .then(res => {
                 setArticleInfo(res.data.data.result[0])
@@ -41,7 +42,7 @@ const handleSubmit = (e) => {
         dataFile.append('caption', articleInfo.caption)
         dataFile.append('id', articleId)
         
-        axios.post(`${BASE_URL}/admin/updateArticlePhoto`, dataFile)
+        axios.patch(`${BASE_URL}/articles/photo`, dataFile)
         .then(res=>{
             if(res.data.data.result.affectedRows > 0){
                 setIsChangePage(true)

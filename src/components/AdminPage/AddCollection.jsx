@@ -1,8 +1,9 @@
+import {checkVide, lengthLimit} from "../../tools/inputCheck.js"
+
+import {BASE_URL} from "../../tools/constante.js"
+import { Navigate } from "react-router-dom"
 import axios from "axios"
 import { useState } from "react"
-import {BASE_URL} from "../../tools/constante.js"
-import {lengthLimit, checkVide} from "../../tools/inputCheck.js"
-import { Navigate } from "react-router-dom"
 
 const AddCollection = (props) => {
     const initialValue = { title:"", description:"" }
@@ -18,7 +19,7 @@ const AddCollection = (props) => {
             return
         }
         
-        axios.post(`${BASE_URL}/admin/addCollection`, collectionInfo)
+        axios.post(`${BASE_URL}/collections`, collectionInfo)
         .then(res=>{
             if(res.data.data.result.affectedRows > 0){
                     setIsChangePage(true)

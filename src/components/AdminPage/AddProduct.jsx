@@ -1,8 +1,9 @@
-import axios from "axios"
-import { useState, useEffect } from "react"
+import {checkVide, isNumber, isPositiveInteger, lengthLimit} from "../../tools/inputCheck.js"
+import { useEffect, useState } from "react"
+
 import {BASE_URL} from "../../tools/constante.js"
-import {lengthLimit, checkVide, isNumber, isPositiveInteger} from "../../tools/inputCheck.js"
 import { Navigate } from "react-router-dom"
+import axios from "axios"
 
 const AddProduct = (props) => {
     
@@ -25,7 +26,7 @@ const AddProduct = (props) => {
     const [collectionList, setCollectionList] = useState([])
     
     useEffect(() => {
-        axios.get(`${BASE_URL}/admin/collection`)
+        axios.get(`${BASE_URL}/collections`)
             .then(function(response) {
                 setCollectionList(response.data.data.result);
             })
@@ -72,7 +73,7 @@ const AddProduct = (props) => {
         dataFile.append('seat_depth', productInfo.seat_depth)
         
         
-        axios.post(`${BASE_URL}/admin/addProduct`, dataFile)
+        axios.post(`${BASE_URL}/products`, dataFile)
         .then(res=>{
             if(res.data.data.result.affectedRows > 0){
                 setIsChangePage(true)

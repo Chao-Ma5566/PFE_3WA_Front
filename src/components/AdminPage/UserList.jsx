@@ -1,15 +1,15 @@
-import {useEffect,useContext,useState} from 'react'
-import axios from 'axios'
-import { StoreContext } from "../../tools/context.js"
+import {useContext, useEffect, useState} from 'react'
+
 import {BASE_URL} from "../../tools/constante.js"
 import { NavLink } from "react-router-dom"
-
+import { StoreContext } from "../../tools/context.js"
+import axios from 'axios'
 
 const UserList = (props) => {
     const [userList, setUserList] = useState([])
     // const  [state, dispatch] = React.useContext(StoreContext);
     useEffect(() => {
-        axios.get(`${BASE_URL}/admin/users`)
+        axios.get(`${BASE_URL}/users`)
             .then(function(response) {
                 setUserList(response.data.data);
             })

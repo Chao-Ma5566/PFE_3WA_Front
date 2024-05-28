@@ -1,9 +1,10 @@
-import axios from "axios"
-import {useState, useEffect, useContext} from "react"
-import { useParams } from "react-router-dom";
-import {BASE_URL, BASE_IMG} from "../tools/constante.js"
+import {BASE_IMG, BASE_URL} from "../tools/constante.js"
 import { NavLink, Navigate } from "react-router-dom"
+import {useContext, useEffect, useState} from "react"
+
 import { StoreContext } from "../tools/context.js"
+import axios from "axios"
+import { useParams } from "react-router-dom";
 
 const Product = (props) => {
     const { productId } = useParams();
@@ -14,7 +15,7 @@ const Product = (props) => {
     
     useEffect(() => {
         setIsLoading(true)
-        axios.post(`${BASE_URL}/getProductById`, { id: productId })
+        axios.get(`${BASE_URL}/products/${productId}`)
             .catch(err => console.log(err))
             .then(res => {
                 setProductInfo(res.data.data.result[0])
@@ -66,7 +67,7 @@ const Product = (props) => {
             dispatch({type:"GET_CART_ITEMS", payload: newProductList})
         }
         
-        axios.post(`${BASE_URL}/addCart`,{
+        axios.post(`${BASE_URL}/cart`,{
             user_id: state.user.id, 
             product_id: Number(productId),
             quantity: quantity,

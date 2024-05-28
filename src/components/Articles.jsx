@@ -1,10 +1,10 @@
-import { useEffect,useState } from 'react'
-import axios from 'axios'
-import {BASE_URL, BASE_IMG} from "../tools/constante.js"
+import {BASE_IMG, BASE_URL} from "../tools/constante.js"
+import { useEffect, useState } from 'react'
+
 import { NavLink } from "react-router-dom"
-import twitter from "../assert/icon/userIcon/twitter.svg"
+import axios from 'axios'
 import instagram from "../assert/icon/userIcon/instagram.svg"
-import TrackVisibility from 'react-on-screen'
+import twitter from "../assert/icon/userIcon/twitter.svg"
 
 const Articles = (props) => {
     const [articleList, setArticleList] = useState([])
@@ -12,7 +12,7 @@ const Articles = (props) => {
     
     useEffect(() => {
         setIsLoading(true)
-        axios.get(`${BASE_URL}/admin/articles`)
+        axios.get(`${BASE_URL}/articles`)
             .then(function(response) {
                 setArticleList(response.data.data.result);
             })

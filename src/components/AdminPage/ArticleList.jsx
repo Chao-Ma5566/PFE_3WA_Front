@@ -1,8 +1,8 @@
-import { useEffect,useState } from 'react'
-import axios from 'axios'
-import {BASE_URL, BASE_IMG} from "../../tools/constante.js"
-import { NavLink } from "react-router-dom"
+import {BASE_IMG, BASE_URL} from "../../tools/constante.js"
+import { useEffect, useState } from 'react'
 
+import { NavLink } from "react-router-dom"
+import axios from 'axios'
 
 const ArticleList = (props) => {
     const [articleList, setArticleList] = useState([])
@@ -10,7 +10,7 @@ const ArticleList = (props) => {
     // const  [state, dispatch] = React.useContext(StoreContext);
     useEffect(() => {
         setIsLoading(true)
-        axios.get(`${BASE_URL}/admin/articles`)
+        axios.get(`${BASE_URL}/articles`)
             .then(function(response) {
                 setArticleList(response.data.data.result);
             })

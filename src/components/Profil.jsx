@@ -1,10 +1,11 @@
-import axios from "axios"
-import {useState, useEffect, useContext} from "react"
-import { useParams } from "react-router-dom";
-import {BASE_URL} from "../tools/constante.js"
 import { NavLink, Navigate } from "react-router-dom"
+import {useContext, useEffect, useState} from "react"
+
+import {BASE_URL} from "../tools/constante.js"
 import ConfirmationWindow from "./ConfirmationWindow.jsx"
 import {StoreContext} from "../tools/context.js"
+import axios from "axios"
+import { useParams } from "react-router-dom";
 
 const Profil = (props) => {
     const { userId } = useParams();
@@ -16,7 +17,7 @@ const Profil = (props) => {
     
     useEffect(() => {
         setIsLoading(true)
-        axios.post(`${BASE_URL}/getUserById`, { id: userId })
+        axios.get(`${BASE_URL}/users/${userId}`)
             .catch(err => console.log(err))
             .then(res => setUserInfo(res.data.data[0]))
             .then(res => setIsLoading(false))
@@ -28,7 +29,7 @@ const Profil = (props) => {
         return formattedDate
     }
     const handleDelete = () =>{
-        axios.post(`${BASE_URL}/admin/deleteUser`,{id:userId})
+        axios.delete(`${BASE_URL}/users/${userId}`)
         .then(res=>{
                 if(res.data.data.affectedRows > 0){
                     setIsDelete(true)

@@ -1,9 +1,10 @@
-import axios from "axios"
-import { useState, useEffect } from "react"
-import {BASE_URL} from "../../tools/constante.js"
-import {lengthLimit, checkVide, isPositiveInteger, isNumber} from "../../tools/inputCheck.js"
 import { Navigate, useParams } from "react-router-dom"
+import {checkVide, isNumber, isPositiveInteger, lengthLimit} from "../../tools/inputCheck.js"
+import { useEffect, useState } from "react"
+
+import {BASE_URL} from "../../tools/constante.js"
 import ConfirmationWindow from "../ConfirmationWindow.jsx"
+import axios from "axios"
 
 const UpdateProduct = (props) => {
     const {productId} = useParams()
@@ -31,11 +32,11 @@ const UpdateProduct = (props) => {
     const [collectionList, setCollectionList] = useState([])
     
     useEffect(() => {
-        axios.post(`${BASE_URL}/getProductById`, { id: productId })
+        axios.get(`${BASE_URL}/products/${productId}`)
             .catch(err => console.log(err))
             .then(res => {
                 setProductInfo(res.data.data.result[0])
-                axios.get(`${BASE_URL}/admin/collection`)
+                axios.get(`${BASE_URL}/collections`)
                     .then(function(response) {
                         setCollectionList(response.data.data.result);
                     })
@@ -60,7 +61,7 @@ const UpdateProduct = (props) => {
             setMessageErr("Le prix, stockage et les dimensions ne peuvent qu'être chiffre") 
             return
         }
-        axios.post(`${BASE_URL}/admin/updateProduct`, {
+        axios.patch(`${BASE_URL}/products`, {
         name: productInfo.name, 
         description: productInfo.description,
         collection_id: productInfo.collection_id,
@@ -107,7 +108,7 @@ const UpdateProduct = (props) => {
     }
     
     const handleDelete = () => {
-        axios.post(`${BASE_URL}/admin/deleteProduct`,{id:productId})
+        axios.delete(`${BASE_URL}/products/${productId}`)
         .then(res=>{
                 if(res.data.data.result.affectedRows > 0){
                     setIsDelete(true)

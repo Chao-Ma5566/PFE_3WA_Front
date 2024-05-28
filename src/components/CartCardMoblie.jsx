@@ -1,6 +1,7 @@
-import { BASE_URL, BASE_IMG } from "../tools/constante.js"
-import { useContext, useState } from 'react'
+import { BASE_IMG, BASE_URL } from "../tools/constante.js"
 import { NavLink, Navigate } from "react-router-dom"
+import { useContext, useState } from 'react'
+
 import { StoreContext } from "../tools/context.js"
 import axios from "axios"
 
@@ -17,7 +18,7 @@ const CartCardMoblie = ({ product, index }) => {
         newList[index].quantity = newList[index].quantity + 1
         console.log(newList)
         dispatch({ type: "GET_CART_ITEMS", payload: newList});
-        axios.post(`${BASE_URL}/addCart`,{
+        axios.post(`${BASE_URL}/cart`,{
             user_id: state.user.id, 
             product_id: product.id,
             cart_id: state.user.cart_id, 
@@ -34,7 +35,7 @@ const CartCardMoblie = ({ product, index }) => {
         let newList = state.cartItems
         newList = newList.filter(item=>item.id !==product.id)
         dispatch({ type: "GET_CART_ITEMS", payload: newList});
-            axios.post(`${BASE_URL}/deleteProductCart`,{
+            axios.patch(`${BASE_URL}/cart`,{
             cart_id: state.user.cart_id, 
             product_id: product.id,
         })
@@ -53,7 +54,7 @@ const CartCardMoblie = ({ product, index }) => {
             newList[index].quantity = newList[index].quantity - 1
             console.log(newList)
             dispatch({ type: "GET_CART_ITEMS", payload: newList});
-            axios.post(`${BASE_URL}/addCart`,{
+            axios.post(`${BASE_URL}/cart`,{
                 user_id: state.user.id, 
                 product_id: product.id,
                 cart_id: state.user.cart_id, 

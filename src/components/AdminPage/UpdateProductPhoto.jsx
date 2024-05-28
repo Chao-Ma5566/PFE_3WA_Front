@@ -1,8 +1,9 @@
-import axios from "axios"
+import {BASE_IMG, BASE_URL} from "../../tools/constante.js"
+import { Navigate, useParams } from "react-router-dom"
+import {checkVide, lengthLimit} from "../../tools/inputCheck.js"
 import { useEffect, useState } from "react"
-import {BASE_URL, BASE_IMG} from "../../tools/constante.js"
-import { useParams,Navigate } from "react-router-dom"
-import {lengthLimit, checkVide} from "../../tools/inputCheck.js"
+
+import axios from "axios"
 
 const UpdateProductPhoto = (props) => {
     const { productId } = useParams();
@@ -13,7 +14,7 @@ const UpdateProductPhoto = (props) => {
     
     useEffect(() => {
         setIsLoading(true)
-        axios.post(`${BASE_URL}/getProductById`, { id: productId })
+        axios.get(`${BASE_URL}/products/${productId}`)
             .catch(err => console.log(err))
             .then(res => {
                 setProductInfo(res.data.data.result[0])
@@ -43,7 +44,7 @@ const handleSubmit = (e) => {
         dataFile.append('caption', productInfo.caption)
         dataFile.append('id', productId)
         
-        axios.post(`${BASE_URL}/admin/updateProductPhoto`, dataFile)
+        axios.patch(`${BASE_URL}/products/photo`, dataFile)
         .then(res=>{
             if(res.data.data.result.affectedRows > 0){
                 setIsChangePage(true)

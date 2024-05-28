@@ -1,10 +1,11 @@
-import axios from "axios"
-import {useState, useEffect} from "react"
-import { useParams } from "react-router-dom";
-import {BASE_URL} from "../tools/constante.js"
 import { NavLink, Navigate } from "react-router-dom"
-import {lengthLimit, checkVide} from "../tools/inputCheck.js"
+import {checkVide, lengthLimit} from "../tools/inputCheck.js"
+import {useEffect, useState} from "react"
+
+import {BASE_URL} from "../tools/constante.js"
 import ConfirmationWindow from "./ConfirmationWindow.jsx"
+import axios from "axios"
+import { useParams } from "react-router-dom";
 
 const UpdateProfil = (props) => {
     const { userId } = useParams();
@@ -17,7 +18,7 @@ const UpdateProfil = (props) => {
     
     useEffect(() => {
         setIsLoading(true)
-        axios.post(`${BASE_URL}/getUserById`, { id: userId })
+        axios.get(`${BASE_URL}/users/${userId}`)
             .catch(err => console.log(err))
             .then(res => {
                 const {first_name, last_name, birthday} = res.data.data[0]
@@ -42,7 +43,7 @@ const UpdateProfil = (props) => {
             return
         }
         
-        axios.post(`${BASE_URL}/updateProfil`, {
+        axios.patch(`${BASE_URL}/users`, {
             last_name: userInfo.last_name.trim(),
             first_name: userInfo.first_name.trim(),
             birthday: userInfo.birthday,
@@ -67,7 +68,7 @@ const UpdateProfil = (props) => {
     }
     
     const handleDelete = () =>{
-        axios.post(`${BASE_URL}/admin/deleteUser`,{id:userId})
+        axios.delete(`${BASE_URL}/users/${userId}`)
         .then(res=>{
                 if(res.data.data.affectedRows > 0){
                     setIsDelete(true)

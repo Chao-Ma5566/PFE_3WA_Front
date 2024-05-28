@@ -1,9 +1,10 @@
-import axios from "axios"
-import {useState, useEffect} from "react"
-import { useParams } from "react-router-dom";
+import {checkVide, lengthLimit} from "../tools/inputCheck.js"
+import {useEffect, useState} from "react"
+
 import {BASE_URL} from "../tools/constante.js"
 import { NavLink } from "react-router-dom"
-import {lengthLimit, checkVide} from "../tools/inputCheck.js"
+import axios from "axios"
+import { useParams } from "react-router-dom";
 
 const UpdatePassword = (props) => {
     const { userId } = useParams();
@@ -25,7 +26,7 @@ const UpdatePassword = (props) => {
             return
         }
         
-        axios.post(`${BASE_URL}/updatePassword`, userInfo)
+        axios.patch(`${BASE_URL}/users/${userId}/password`, userInfo)
         .then(res=>{
             setMessageErr(res.data.data.response)
         }).catch(err=>{

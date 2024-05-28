@@ -1,8 +1,9 @@
+import {checkVide, lengthLimit} from "../../tools/inputCheck.js"
+
+import {BASE_URL} from "../../tools/constante.js"
+import { Navigate } from "react-router-dom"
 import axios from "axios"
 import { useState } from "react"
-import {BASE_URL} from "../../tools/constante.js"
-import {lengthLimit, checkVide} from "../../tools/inputCheck.js"
-import { Navigate } from "react-router-dom"
 
 const AddArticle = (props) => {
     
@@ -29,7 +30,7 @@ const AddArticle = (props) => {
         dataFile.append('title', articleInfo.title)
         dataFile.append('content', articleInfo.content)
         
-        axios.post(`${BASE_URL}/admin/addArticle`, dataFile)
+        axios.post(`${BASE_URL}/articles`, dataFile)
         .then(res=>{
             if(res.data.data.result.affectedRows > 0){
                 setIsChangePage(true)

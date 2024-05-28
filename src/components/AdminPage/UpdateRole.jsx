@@ -1,14 +1,14 @@
-import {useEffect,useState} from 'react'
-import axios from 'axios'
-import {BASE_URL} from "../../tools/constante.js"
+import {useEffect, useState} from 'react'
 
+import {BASE_URL} from "../../tools/constante.js"
+import axios from 'axios'
 
 const UpdateRole = (props) => {
     const [userList, setUserList] = useState([])
     const [messageErr, setMessageErr] = useState("")
     
     useEffect(() => {
-        axios.get(`${BASE_URL}/admin/users`)
+        axios.get(`${BASE_URL}/users`)
             .then(function(response) {
                 setUserList(response.data.data);
             })
@@ -19,7 +19,7 @@ const UpdateRole = (props) => {
     
     const handleUpdate = (id)=>{
         const updatedInfo = userList.filter(user => user.id === id )
-        axios.post(`${BASE_URL}/admin/updateRole`,{
+        axios.patch(`${BASE_URL}/role`,{
             id: updatedInfo[0].id, 
             role_id: updatedInfo[0].role_id
         })

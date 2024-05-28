@@ -1,10 +1,10 @@
+import { Navigate, useParams } from "react-router-dom"
+import { checkVide, lengthLimit } from "../../tools/inputCheck.js"
 import { useEffect, useState } from 'react'
-import axios from 'axios'
-import { BASE_URL } from "../../tools/constante.js"
-import { lengthLimit, checkVide } from "../../tools/inputCheck.js"
-import ConfirmationWindow from "../ConfirmationWindow.jsx"
-import { useParams,Navigate } from "react-router-dom"
 
+import { BASE_URL } from "../../tools/constante.js"
+import ConfirmationWindow from "../ConfirmationWindow.jsx"
+import axios from 'axios'
 
 const UpdateCollection = (props) => {
     const { collectionId } = useParams();
@@ -16,7 +16,7 @@ const UpdateCollection = (props) => {
     
     useEffect(() => {
         setIsLoading(true)
-        axios.post(`${BASE_URL}/admin/getCollectionById`, { id: collectionId })
+        axios.get(`${BASE_URL}/collections/${collectionId}`)
             .catch(err => console.log(err))
             .then(res => {
                 console.log(res)
@@ -35,7 +35,7 @@ const UpdateCollection = (props) => {
             return
         }
         
-        axios.post(`${BASE_URL}/admin/updateCollection`, {
+        axios.patch(`${BASE_URL}/collections`, {
             title: collectionInfo.title,
             description: collectionInfo.description,
             id: collectionId
@@ -53,7 +53,7 @@ const UpdateCollection = (props) => {
     }
     
     const handleDelete = () => {
-        axios.post(`${BASE_URL}/admin/deleteCollection`,{id:collectionId})
+        axios.delete(`${BASE_URL}/collections/${collectionId}`)
         .then(res=>{
                 if(res.data.data.result.affectedRows > 0){
                     setIsDelete(true)

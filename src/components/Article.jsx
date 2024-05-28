@@ -1,8 +1,9 @@
-import axios from "axios"
+import {BASE_IMG, BASE_URL} from "../tools/constante.js"
+import { NavLink, useParams } from "react-router-dom"
 import {useContext, useEffect, useState} from "react"
+
 import {StoreContext} from "../tools/context.js"
-import {BASE_URL, BASE_IMG} from "../tools/constante.js"
-import { NavLink,useParams } from "react-router-dom"
+import axios from "axios"
 
 const Article = (props) => {
     const { articleId } = useParams();
@@ -12,7 +13,7 @@ const Article = (props) => {
     
     useEffect(() => {
         setIsLoading(true)
-        axios.post(`${BASE_URL}/getArticleById`, { id: articleId })
+        axios.get(`${BASE_URL}/articles/${articleId}`)
             .catch(err => console.log(err))
             .then(res => {
                 setArticleInfo(res.data.data.result[0])
