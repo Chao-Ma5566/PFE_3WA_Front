@@ -32,6 +32,7 @@ const reducer = (state, action) => {
             }
         
         case "GET_CART_ITEMS":
+            // eslint-disable-next-line no-case-declarations
             let sum = 0 
             state.cartItems.forEach(item => {
                 sum += Number(item.quantity)
