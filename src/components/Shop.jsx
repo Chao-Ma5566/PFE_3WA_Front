@@ -8,7 +8,6 @@ import axios from 'axios'
 
 const Shop = () =>{
     const [productList, setProductList] = useState([])
-    const [state, dispatch] = useContext(StoreContext);
     const [isLoading, setIsLoading] = useState(true)
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 8;
@@ -98,8 +97,8 @@ const Shop = () =>{
             <SearchBar onSearch={handleSearch} />
             {
                 productList.length > 0 ?
-            <div>
-                <div className="w-full pt-4 max-w-screen overflow-hidden h-full px-4 grid grid-cols-1 lg:grid-cols-4 gap-2 overscroll-auto md:grid-cols-2 min-h-screen">
+            <div className="min-h-screen">
+                <div className="w-full pt-4 max-w-screen overflow-hidden h-full px-4 grid grid-cols-1 lg:grid-cols-4 gap-2 overscroll-auto md:grid-cols-2 ">
                     {productList.map((product,i)=>{
                     return <ProductCard 
                             data={product}
@@ -108,7 +107,7 @@ const Shop = () =>{
                             />
                     })}
                 </div>
-                <div className="pagination text-center">
+                <div className="pagination text-center mt-4">
                     <button className="m-2" disabled={currentPage === 1} onClick={() => handlePageChange(currentPage - 1)}>Previous</button>
                     <button className="m-2 px-3 bg-primary">{currentPage}</button>
                     {productList.length === itemsPerPage && <button className="m-2"  onClick={() => handlePageChange(currentPage + 1)}>Next</button>}
