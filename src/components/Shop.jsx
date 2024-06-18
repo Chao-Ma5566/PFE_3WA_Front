@@ -3,7 +3,6 @@ import {useContext, useEffect, useState} from 'react'
 import {BASE_URL} from "../tools/constante.js"
 import ProductCard from "./ProductCard.jsx"
 import SearchBar from "./SearchBar.jsx";
-import { StoreContext } from "../tools/context.js"
 import axios from 'axios'
 
 const Shop = () =>{

@@ -1,2 +1,2 @@
-export const BASE_URL = 'https://pfe-3wa.onrender.com'
-export const BASE_IMG = 'https://pfe-3wa.onrender.com/img'
+export const BASE_URL = process.env.REACT_APP_BASE_URL
+export const BASE_IMG = process.env.REACT_APP_BASE_IMG
