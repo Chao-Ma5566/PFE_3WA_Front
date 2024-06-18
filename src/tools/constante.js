@@ -1,2 +1,2 @@
-export const BASE_URL = 'http://localhost:3001'
-export const BASE_IMG = 'http://localhost:3001/img'
+export const BASE_URL = 'https://pfe-3wa.onrender.com'
+export const BASE_IMG = 'https://pfe-3wa.onrender.com/img'
