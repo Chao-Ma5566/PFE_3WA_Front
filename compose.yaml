@@ -1,0 +1,11 @@
+version: "3"
+services:
+  orea-front:
+    container_name: threebody-front
+    build:
+      context: .
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/usr/src/app/threebody-front
+      - /usr/src/app/react-docker/node_modules
